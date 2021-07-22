@@ -64,7 +64,44 @@ const matrix3 = [// expected: false when greaterThan = 200 and equalTo = 14
 ];
 
 function matrixHasValidPaths(matrix, greaterThan, equalTo) {
-	// Write your code here
+	// Solution
+	let largestSum = matrix[0][0];
+	let found = false;
+
+	function rec(row, col, matrix, currentPathSum) {
+		// If we somehow are out of bounds, exit the callstack/go backwards
+		if (row < 0 || col < 0 || row >= matrix.length || col >= matrix[row].length) {
+			return;
+		}
+
+		const currentValue = matrix[row][col];
+		currentPathSum += currentValue;
+
+		if (currentValue == "$") return;// In this case we've visited
+
+		const reachedEnd = (row == matrix.length - 1 && col === matrix[row].length - 1);
+		if (reachedEnd) {// At the bottom right corner
+			if (currentPathSum === equalTo) {// We are hoping to find at least one path the sums to exactly 'z'. This will force the algorithm to explore every possible path.
+				found = true;
+			}
+
+			largestSum = Math.max(currentPathSum, largestSum);
+			return;
+		}
+
+		matrix[row][col] = "$";// Here I'm setting the current element to $ to show a visited cell so we don't hit a recursive cycle.
+
+		rec(row + 1, col, matrix, currentPathSum);// explore the bottom cell
+		rec(row, col + 1, matrix, currentPathSum);// explore the right cell
+		rec(row - 1, col, matrix, currentPathSum);// explore the top cell
+		rec(row, col - 1, matrix, currentPathSum);// explore the left cell
+
+		matrix[row][col] = currentValue;// Because we set the current cell = $, we need to change it back to its original value so we can come back to it when we are on another path
+	}
+
+	rec(0, 0, matrix, 0);
+
+	return largestSum > greaterThan && found;// Found is only set to true if we've found one path that is equal to z
 }
 
 const resultTest1 = matrixHasValidPaths(matrix1, 12, -12);// true
