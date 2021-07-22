@@ -1,5 +1,5 @@
 /*
-	Given a matrix and two variables `greaterThan` and `equalTo`, travese the matrix finding the sum of a single path that is equal to `equalTo` and the path with the greatest sum larger than `greaterThan`. If both of these conditions are true, return true, else false.
+	You are given a matrix and two variables `greaterThan` and `equalTo`. Your task is to traverse the matrix finding one sum of a single path that is equal to `equalTo`. You must also find a different path with a sum larger than `greaterThan`. If both of these conditions are true, return true, else false.
 	A path can go in any direction, but cannot overlap itself and must start in the top left and end in the bottom right corner. The allowed moves are: up, down, left and right.
 
 	input:
@@ -15,11 +15,17 @@
 	answer: true
 
 	In the example below, I've put the answer to path with the greatest sum with asterisk for a visual representation.
-
 	matrix = [
 		[*-1, *3, *6],
 		[-22,-31, *1],
 		[11, 13,  *4]
+	]
+
+	Using the same matrix from the example above, I've put the answer to path with the sum equal to `equalTo` with asterisk for a visual representation.
+	matrix = [
+		[*-1, *3, 6],
+		[-22,*-31, 1],
+		[11, *13,  *4]
 	]
 
 	Explanation:
@@ -28,9 +34,9 @@
 
 	Feel free to solve this problem in your programming language of choice. The expected results for each of the matrices are listed next to each.
 	For example, your algorithm should give the following results:
-		maxPathInMatrix(matrix1, 12, -12) => true
- 		maxPathInMatrix(matrix2, 352, 3) => true
- 		maxPathInMatrix(matrix3, 200, 14) => false
+		matrixHasValidPaths(matrix1, 12, -12) => true
+ 		matrixHasValidPaths(matrix2, 352, 3) => true
+ 		matrixHasValidPaths(matrix3, 200, 14) => false
 */
 
 
@@ -57,21 +63,21 @@ const matrix3 = [// expected: false when greaterThan = 200 and equalTo = 14
 	[-11, 136, 4],
 ];
 
-function maxPathInMatrix(matrix, greaterThan, equalTo) {
+function matrixHasValidPaths(matrix, greaterThan, equalTo) {
 	// Write your code here
 }
 
-const resultTest1 = maxPathInMatrix(matrix1, 12, -12);// true
+const resultTest1 = matrixHasValidPaths(matrix1, 12, -12);// true
 console.log(
 	resultTest1 ? 'Correct: test case passed' : 'Failed to pass test case'
 );
 
-const resultTest2 = maxPathInMatrix(matrix2, 352, 3);// true
+const resultTest2 = matrixHasValidPaths(matrix2, 352, 3);// true
 console.log(
 	resultTest2 ? 'Correct: test case passed' : 'Failed to pass test case'
 );
 
-const resultTest3 = maxPathInMatrix(matrix3, 200, 14);// false
+const resultTest3 = matrixHasValidPaths(matrix3, 200, 14);// false
 console.log(
 	!resultTest3 && typeof resultTest3 !== 'undefined' ? 'Correct: test case passed' : 'Failed to pass test case'
 );
